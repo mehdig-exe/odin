@@ -11,6 +11,12 @@
                 <button id ="rockButton" value="Rock">Rock</button>
                 <button id="paperButton" value="Paper">Paper</button>
                 <button id="scissorsButton" value="Scissors">Scissors</button>
+                <div id="playerScore">
+                    <p>Player Score: 0</p>
+                </div>
+                <div id="compScore">
+                    <p>Computer Score: 0</p>
+                </div>
                 <div id="output">
 
                 </div>
@@ -18,66 +24,69 @@
             
         </div>
         <script>
-        function computerPlay() {
-            let choice = ["rock", "paper", "scissors"];
-            let number = Math.floor(Math.random()*3);
-            return choice[number]
-        }
-        function playRound(playerSelection, computerSelection) {
-            let pS = playerSelection.toLowerCase();
-            let cS = computerSelection.toLowerCase();
-            if (pS == cS) {
-                console.log("Draw!");
-                return "Draw!"
+            playerScore = 0;
+            compScore = 0;
+            function computerPlay() {
+                let choice = ["rock", "paper", "scissors"];
+                let number = Math.floor(Math.random()*3);
+                return choice[number]
             }
-            else if ((pS == "rock") && (cS == "scissors")) {
-                console.log("You win! Rock beats Scissors!");
-                return "You win! Rock beats Scissors!"
-            }
-            else if ((pS == "scissors") && (cS == "paper")) {
-                console.log("You win! Scissors beats Paper!");
-                return "You win! Scissors beats Paper!"
-            }
-            else if ((pS == "paper") && (cS == "rock")) {
-                console.log("You win! Paper beats Rock!");
-                return "You win! Paper beats Rock!"
-            }
-            else {
-                console.log(`You lose! ${cS} beats ${pS}`)
-                return `You lose! ${cS} beats ${pS}`
+            function playRound(playerSelection, computerSelection) {
+                pS = playerSelection.toLowerCase();
+                cS = computerSelection.toLowerCase();
+                
+                if (pS == cS) {
+                    console.log("Draw!");
+                    return "Draw!"
+                }
+                else if ((pS == "rock") && (cS == "scissors")) {
+                    console.log("You win! Rock beats Scissors!");
+                    playerScore += 1;
+                    return "You win! Rock beats Scissors!"
+                }
+                else if ((pS == "scissors") && (cS == "paper")) {
+                    console.log("You win! Scissors beats Paper!");
+                    playerScore += 1;
+                    return "You win! Scissors beats Paper!"
+                }
+                else if ((pS == "paper") && (cS == "rock")) {
+                    console.log("You win! Paper beats Rock!");
+                    playerScore += 1;
+                    return "You win! Paper beats Rock!"
+                }
+                else {
+                    console.log(`You lose! ${cS} beats ${pS}`)
+                    compScore += 1;
+                    return `You lose! ${cS} beats ${pS}`
+                }
+
             }
 
-        }
-        console.log(computerPlay());
-        console.log(playRound("paper","scissors"));
 
-        //const rockBtn = document.querySelector('#rockButton');
-        //const paperBtn = document.querySelector('#paperButton')
-        //const scissorsBtn = document.querySelector('#scissorsButton')
+            //btn.addEventListener('click', () => {
+            //    output.appendChild(btn.cloneNode());
+            //})
 
-        //const output = document.querySelector('#output');
-        //btn.addEventListener('click', () => {
-        //    output.appendChild(btn.cloneNode());
-        //})
+            const buttons = document.querySelectorAll('button');
+            const container = document.querySelector('#container');
+            const div = document.createElement('div');
+            const output = document.querySelector('#output');
+            const playerScoreDiv = document.querySelector('#playerScore');
+            const compScoreDiv = document.querySelector('#compScore');
 
-        const buttons = document.querySelectorAll('button');
-        const container = document.querySelector('#container');
-        const div = document.createElement('div');
-
-        buttons.forEach((button) => {
-            button.addEventListener('click', () => {
-                //let choice = button.cloneNode([true])
-                //output.appendChild(choice);
-                div.textContent = button.value;
-                container.appendChild(div)
-                console.log(button.value)
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    //let choice = button.cloneNode([true])
+                    //output.appendChild(choice);
+                    div.textContent = playRound(button.value, computerPlay());
+                    container.appendChild(div)
+                    output.textContent = `Computer choice: ${cS}`;
+                    playerScoreDiv.textContent = `Player Score: ${playerScore}`
+                    compScoreDiv.textContent = `Computer Score: ${compScore}`
+                })
             })
-        })
         
-
-
-        div.textContent = playRound("paper","rock");
-        
+            
 
         </script>
     </body>
