@@ -8,9 +8,9 @@
         <div id="container">
             <div id="userChoice">
                 <p>Choose Rock, Paper or Scissors!</p>
-                <button id ="rockButton" class="userButton">Rock</button>
-                <button id="paperButton" class="userButton">Paper</button>
-                <button id="scissorsButton" class="userButton">Scissors</button>
+                <button id ="rockButton" value="Rock">Rock</button>
+                <button id="paperButton" value="Paper">Paper</button>
+                <button id="scissorsButton" value="Scissors">Scissors</button>
                 <div id="output">
 
                 </div>
@@ -61,19 +61,23 @@
         //})
 
         const buttons = document.querySelectorAll('button');
+        const container = document.querySelector('#container');
+        const div = document.createElement('div');
 
         buttons.forEach((button) => {
             button.addEventListener('click', () => {
-                let choice = button.cloneNode([true])
-                output.appendChild(choice);
+                //let choice = button.cloneNode([true])
+                //output.appendChild(choice);
+                div.textContent = button.value;
+                container.appendChild(div)
+                console.log(button.value)
             })
         })
         
 
-        const container = document.querySelector('#container');
-        const div = document.createElement('div');
+
         div.textContent = playRound("paper","rock");
-        container.appendChild(div)
+        
 
         </script>
     </body>
