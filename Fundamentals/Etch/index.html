@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Etch-A-Sketch</title>
+        <meta charset="UTF-8"/>
+        <link href="css.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="title">
+            <h1 class="Title">Etch-A-Sketch</h1>
+        </div>
+        <div class="buttons">
+            <div id="generateButton">
+                <button>Generate Grid!</button>
+            </div>
+            <div id="clearButton">
+                <button>Clear Grid!</button>
+            </div>
+        </div>
+        <div id="etchGrid">
+            
+        </div>
+        <script>
+            const gridButton = document.querySelector("#generateButton");
+            const createdGrid = document.createElement('div');
+            const grid = document.querySelector("#etchGrid");
+            createdGrid.classList.add("container")
+
+            const gridClearButton = document.querySelector("#clearButton")
+            
+            gridClearButton.addEventListener('click', () => {
+                gridClear();
+            })
+
+            gridButton.addEventListener('click', () => {
+                gridGenerate();
+            })
+
+
+
+            function gridGenerate() {
+                const row = 16;
+                const col = 16;
+                for (let i = 0; i < row*col; i++) {
+                    let cell = document.createElement("div");
+                    cell.setAttribute("class","cells");
+                    cell.addEventListener('mouseover', e => {
+                        e.target.classList.add("hovered");
+                    })
+                    createdGrid.appendChild(cell);
+                }
+                createdGrid.style.gridTemplateColumns = `repeat(${col}, 1fr)`
+                createdGrid.style.gridTemplateRows = `repeat(${row}, 1fr)`
+                grid.appendChild(createdGrid);
+
+            }
+
+            function gridClear() {
+                while (createdGrid.firstChild) {
+                    createdGrid.removeChild(createdGrid.lastChild);
+                }
+            }
+            
+
+
+        </script>
+    </body>
+</html>

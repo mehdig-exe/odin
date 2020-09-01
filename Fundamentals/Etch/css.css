@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Peta&display=swap');
+
+.Title {
+    color: gray;
+    text-align: center;
+    margin: auto 0;
+    font-family: 'Lexend Peta', sans-serif;
+    text-shadow: 0.5vw 0.5vw 0.5vw #ff4800;
+    font-size: 6vw;
+}
+
+#generateButton {
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+#clearButton {
+    text-align: center;
+}
+
+.cells {
+    background: black;
+}
+
+.container {
+    display: grid;
+	height: 75vh;
+	width: 75vh;
+    margin: 0 auto;
+}
+
+.hovered {
+    background: white;
+}
