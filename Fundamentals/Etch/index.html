@@ -16,6 +16,9 @@
             <div id="clearButton">
                 <button>Clear Grid!</button>
             </div>
+            <div id="rgbButton">
+                <button>RGB Mode!</button>
+            </div>
         </div>
         <div id="etchGrid">
             
@@ -36,16 +39,22 @@
                 gridGenerate();
             })
 
-
-
-            function gridGenerate() {
-                const row = 16;
-                const col = 16;
+            function gridGenerate(rgb=false) {
+                const row = 100;
+                const col = 100;
                 for (let i = 0; i < row*col; i++) {
                     let cell = document.createElement("div");
                     cell.setAttribute("class","cells");
                     cell.addEventListener('mouseover', e => {
-                        e.target.classList.add("hovered");
+                        //e.target.classList.add("hovered");
+                        if (rgb == false) {
+                            e.target.style.background = "white";
+                        }
+                        else {
+                            let color = randomColor();
+                            e.target.style.background = color;
+                        }
+                        
                     })
                     createdGrid.appendChild(cell);
                 }
@@ -61,7 +70,21 @@
                 }
             }
             
+            const rgbButton = document.querySelector("#rgbButton")
 
+            rgbButton.addEventListener('click', () => {
+                rgbGrid();
+            })
+
+            function rgbGrid() {
+                gridGenerate(rgb=true);
+            }
+
+            function randomColor() {
+                let randomColor = "#" +
+                Math.floor(Math.random()*16777215).toString(16);
+                return randomColor
+            }
 
         </script>
     </body>
